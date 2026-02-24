@@ -23,6 +23,7 @@ builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 
 // Register Services
 builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<IFloorplanService, FloorplanService>();
 
 // Configure CORS
 builder.Services.AddCors(options =>
@@ -42,12 +43,12 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new()
     {
-        Title = "Person API",
+        Title = "Floorplan API",
         Version = "v1",
-        Description = "API for managing persons - Mainframe Modernization Demo",
+        Description = "API for managing floorplans - Mainframe Modernization Demo",
         Contact = new()
         {
-            Name = "Person API Support"
+            Name = "Floorplan API Support"
         }
     });
 
@@ -72,7 +73,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Person API V1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Floorplan API V1");
         c.RoutePrefix = string.Empty; // Serve Swagger UI at root
     });
 }
@@ -92,7 +93,7 @@ app.MapControllers();
 app.MapHealthChecks("/health");
 
 // Log application startup
-app.Logger.LogInformation("Person API started successfully - Environment: {Environment}", app.Environment.EnvironmentName);
+app.Logger.LogInformation("Floorplan API started successfully - Environment: {Environment}", app.Environment.EnvironmentName);
 if (app.Environment.IsDevelopment())
 {
     app.Logger.LogInformation("Swagger UI available at: http://localhost:5000");

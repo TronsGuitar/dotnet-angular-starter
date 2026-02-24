@@ -130,6 +130,8 @@ dotnet-angular-starter/
 │       └── Dockerfile               # Multi-stage build
 ├── docker/
 │   └── sql/                         # SQL initialization scripts
+├── docs/                            # Product and feature requirements
+│   └── floorplan-builder-requirements.md
 ├── DOTNET_APPLICATION_TEMPLATE.md   # .NET template (50 tests)
 ├── ANGULAR_APPLICATION_TEMPLATE.md  # Angular template (72 tests)
 ├── docker-compose.yml               # Docker orchestration
@@ -139,32 +141,33 @@ dotnet-angular-starter/
 
 ## 🔌 API Endpoints
 
-### Persons API
+### Floorplans API
 
-- `GET /api/persons` - Get all persons (paginated)
-  - Query params: `pageNumber` (default: 1), `pageSize` (default: 10)
-- `GET /api/persons/{id}` - Get person by ID
-- `POST /api/persons` - Create new person
-- `PUT /api/persons/{id}` - Update person
-- `DELETE /api/persons/{id}` - Delete person
-- `GET /api/persons/search?name={name}` - Search by name
+- `POST /api/projects` - Create floorplan project
+- `GET /api/projects/{projectId}` - Get project with floors
+- `GET /api/floorplans/{floorId}` - Get floor details
+- `PUT /api/floorplans/{floorId}` - Save floor (layers + objects)
+- `POST /api/floorplans/{floorId}/duplicate` - Duplicate floor (e.g., create second floor)
+- `POST /api/survey-assets/{assetId}/ocr` - Queue OCR extraction
+- `GET /api/projects/{projectId}/estimates/carpet` - Get carpet estimate
 
 ### Health & Documentation
 
 - `GET /health` - Health check endpoint
 - `GET /swagger` - Swagger UI (interactive API docs)
 
-## 🗃️ Person Entity
+## 🗃️ Floorplan Project Entity
 
 ```json
 {
-  "id": 1,
-  "name": "John Doe",
-  "age": 30,
-  "dateOfBirth": "1994-01-15T00:00:00Z",
-  "skills": ["C#", ".NET", "Angular"],
-  "createdAt": "2025-10-10T10:00:00Z",
-  "updatedAt": "2025-10-10T11:00:00Z"
+  "id": "d1fbc3fd-5b44-49f1-a9dc-57fa4721a001",
+  "name": "Sample Duplex Plan",
+  "reference": "123 Survey Lot",
+  "measurementUnit": "ft",
+  "floors": [
+    { "floorNumber": 1, "name": "First Floor" },
+    { "floorNumber": 2, "name": "Second Floor" }
+  ]
 }
 ```
 
@@ -181,9 +184,7 @@ make test
   - 37 unit tests (Controllers, Services, Repositories)
   - 13 integration tests (API endpoints with Testcontainers)
 - **Frontend**: 72 tests passing
-  - PersonService: 24 tests
-  - PersonListComponent: 14 tests
-  - PersonFormComponent: 34 tests
+  - Floorplan and person modules across services/components (see `web/person-app/src/app`)
 
 ### Backend Tests Only
 

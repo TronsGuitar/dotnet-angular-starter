@@ -19,6 +19,6 @@ describe('AppComponent', () => {
   it('should have the title property', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toBe('Person Management System');
+    expect(app.title).toBe('Floorplan Management System');
   });
 });

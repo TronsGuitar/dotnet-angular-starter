@@ -1,0 +1,44 @@
+<div class="container my-4">
+  <h2>Floorplan Builder Architecture Shell</h2>
+  <p class="text-muted">Initial architecture setup for projects, floors, layers, OCR flow, and carpet estimate integration.</p>
+
+  <div class="card mb-3">
+    <div class="card-body d-flex gap-2 align-items-center">
+      <input class="form-control" [(ngModel)]="projectName" placeholder="Project name" />
+      <button class="btn btn-primary" (click)="createStarterProject()">Create Project</button>
+      <button class="btn btn-outline-secondary" [disabled]="!activeFloor" (click)="duplicateActiveFloor()">Copy to Next Floor</button>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <div *ngIf="project" class="row g-3">
+    <div class="col-md-3">
+      <div class="list-group">
+        <button
+          *ngFor="let floor of project.floors"
+          class="list-group-item list-group-item-action"
+          [class.active]="activeFloor?.id === floor.id"
+          (click)="switchFloor(floor)">
+          Floor {{ floor.floorNumber }} - {{ floor.name }}
+        </button>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="editor-shell p-4 border rounded">
+        <h5 class="mb-3">{{ activeFloor?.name }}</h5>
+        <p class="mb-1"><strong>Layers:</strong> {{ activeFloor?.layers?.length || 0 }}</p>
+        <p class="mb-3"><strong>Objects:</strong> {{ activeFloor?.objects?.length || 0 }}</p>
+
+        <div class="d-flex flex-wrap gap-2">
+          <span class="badge text-bg-secondary">Survey Image</span>
+          <span class="badge text-bg-secondary">OCR Annotations</span>
+          <span class="badge text-bg-secondary">Walls</span>
+          <span class="badge text-bg-secondary">Rooms</span>
+          <span class="badge text-bg-secondary">Measurements</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

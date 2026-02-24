@@ -130,6 +130,8 @@ dotnet-angular-starter/
 │       └── Dockerfile               # Multi-stage build
 ├── docker/
 │   └── sql/                         # SQL initialization scripts
+├── docs/                            # Product and feature requirements
+│   └── floorplan-builder-requirements.md
 ├── DOTNET_APPLICATION_TEMPLATE.md   # .NET template (50 tests)
 ├── ANGULAR_APPLICATION_TEMPLATE.md  # Angular template (72 tests)
 ├── docker-compose.yml               # Docker orchestration
